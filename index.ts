@@ -42,7 +42,7 @@ export default function mongoWritableStream(parameters: IParameters): stream.Wri
   if (parameters.batchSize > 1) { batchSize = parameters.batchSize; }
   const writable = new stream.Writable({
     write: async (record, encoding, next) => {
-      if (!connection.collection) { await initConnection(connection); }
+      if (!connection.collection) { await initConnection(parameters); }
       await add(record);
       next();
     },
